@@ -41,4 +41,4 @@ app.post('/message', async (req, res) => {
     res.send(chat)
 })
 
-app.listen(process.env.PORT || 8080, () => console.log('Listening at 8080'))
+app.listen(process.env.PORT || 8080);
