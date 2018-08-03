@@ -16,7 +16,19 @@ const pusher = new Pusher({
     cluster: process.env.PUSHER_CLUSTER,
     encrypted: true
 })
-app.post('/message', async (req, res) => {
+
+app.get('/', function (req, res) {
+    res.status(200).json({
+        title: 'Engineer Challenge ',
+        route: [{
+            method: 'Post',
+            url: '/api/message',
+            query: null
+        }]
+    });
+});
+
+app.post('/api/message', async (req, res) => {
     // simulate actual db save with id and createdAt added
     console.log(req.body);
     const chat = {
