@@ -4,7 +4,7 @@ const Pusher = require('pusher');
 const cors = require('cors');
 require('dotenv').config();
 const shortId = require('shortid');
-const dialogFlow = require('./dialogFlow');
+const dialogFlow = require('./config');
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
