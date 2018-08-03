@@ -1,21 +1,21 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const Pusher = require('pusher')
-const cors = require('cors')
-require('dotenv').config()
-const shortId = require('shortid')
-const dialogFlow = require('./dialogFlow')
-const app = express()
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const express = require('express');
+const bodyParser = require('body-parser');
+const Pusher = require('pusher');
+const cors = require('cors');
+require('dotenv').config();
+const shortId = require('shortid');
+const dialogFlow = require('./dialogFlow');
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 const pusher = new Pusher({
     appId: process.env.PUSHER_APP_ID,
     key: process.env.PUSHER_APP_KEY,
     secret: process.env.PUSHER_APP_SECRET,
     cluster: process.env.PUSHER_CLUSTER,
     encrypted: true
-})
+});
 
 app.get('/', function (req, res) {
     res.status(200).json({
@@ -37,7 +37,7 @@ app.post('/api/message', async (req, res) => {
         createdAt: new Date().toISOString()
     }
     //update pusher listeners
-    pusher.trigger('chat-bot', 'chat', chat)
+    pusher.trigger('chat-bot', 'chat', chat);
 
     const message = chat.message;
     const response = await dialogFlow.send(message);
@@ -49,8 +49,8 @@ app.post('/api/message', async (req, res) => {
         type: 'bot',
         createdAt: new Date().toISOString(),
         id: shortId.generate()
-    })
-    res.send(chat)
+    });
+    res.send(chat);
 })
 
 app.listen(process.env.PORT || 8080);
