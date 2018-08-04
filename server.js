@@ -40,7 +40,7 @@ app.post('/api/message', async (req, res) => {
     pusher.trigger('chat-bot', 'chat', chat);
 
     const message = chat.message;
-    const response = await dialogFlow.send(message);
+    const response = await dialogFlow.send(message, chat.lang);
 
     console.log(response.data.result.fulfillment.speech);
     // trigger this update to our pushers listeners
